@@ -4,7 +4,9 @@ import State from "./State.js";
 import Vector from "./Vector.js";
 
 const settings = {
-    FPS: 60,
+    currentFps: 60,
+    framesThisSecond : 0,
+    lastFpsUpdate: 0,
     MS_PER_UPDATE: Number((1000 / 60).toFixed(1))
 };
 const screen = new GameScreen();
@@ -15,10 +17,7 @@ export function start() {
         timeStep = settings.MS_PER_UPDATE;
     
     let lag = 0.0, 
-        previousTime = window.performance.now(),
-        currentFps = 60,
-        framesThisSecond = 0,
-        lastFpsUpdate = 0;
+        previousTime = window.performance.now();
 
     const ball = new GameObject({
         position: new Vector({
@@ -40,13 +39,13 @@ export function start() {
         previousTime = currentTime;
         lag += elapsedTime;
 
-        if (currentTime > lastFpsUpdate + 1000) {
-            currentFps = 0.25 * framesThisSecond + (1 - 0.25) * currentFps;
+        if (currentTime > settings.lastFpsUpdate + 1000) {
+            settings.currentFps = 0.25 * settings.framesThisSecond + (1 - 0.25) * settings.currentFps;
 
-            lastFpsUpdate = currentTime;
-            framesThisSecond = 0;
+            settings.lastFpsUpdate = currentTime;
+            settings.framesThisSecond = 0;
         }
-        framesThisSecond++;
+        settings.framesThisSecond++;
 
         while (lag >= timeStep) {
             
