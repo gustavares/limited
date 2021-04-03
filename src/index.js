@@ -1,6 +1,5 @@
 import {
-    Game
+    start
 } from './engine/index.js';
 
-const game = new Game();
-game.start();
+start();

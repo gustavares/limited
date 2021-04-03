@@ -1,1 +1,1 @@
-export { default as Game } from './Game.js'
+export { start } from './main.js'
