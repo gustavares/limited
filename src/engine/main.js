@@ -59,7 +59,7 @@ export function start() {
             { 
                 state: gameStates[gameStates.length - 1],
                 itensToWrite: {
-                    'FPS': Math.round(currentFps)
+                    'FPS': Math.round(settings.currentFps)
                 }
             }
         );
