@@ -4,6 +4,7 @@ import State from "./State.js";
 import Vector from "./Vector.js";
 
 const ball = new GameObject({
+    name: 'ball',
     position: new Vector({
         x: 50,
         y: 400
@@ -32,13 +33,11 @@ const screen = new GameScreen();
 
 export function start() {
     const 
-        gameStates = [],
+        gameStates = [firstState],
         timeStep = settings.MS_PER_UPDATE;
     
     let lag = 0.0, 
         previousTime = window.performance.now();
-
-    gameStates.push(firstState);
 
     const gameLoop = (currentTime) => {
         const elapsedTime = currentTime - previousTime;
@@ -61,19 +60,20 @@ export function start() {
 
         while (lag >= timeStep) {
             
-            const currentState = gameStates[gameStates.length - 1];
-            const newState = currentState.update(timeStep);
-            gameStates.push(newState);
+            const previousState = gameStates[gameStates.length - 1];
+            const currentState = previousState.update(timeStep);
+            gameStates.push(currentState);
             
             lag -= timeStep;
         }
         render(
             { 
-                state: gameStates[gameStates.length - 1],
+                currentState: gameStates[gameStates.length - 1], 
+                previousState: gameStates[gameStates.length - 2],
                 itensToWrite: {
                     'FPS': Math.round(settings.currentFps)
                 },
-                interpolation: lag / settings.MS_PER_UPDATE
+                interpolation:  lag / settings.MS_PER_UPDATE
             }
         );
 
@@ -98,13 +98,16 @@ function update({ dt, state }) {
 
 /**
  * @param {{
- *  state: State
+ *  currentState: State
+ *  previousState: State
  *  itemsToWrite: Object
  *  interpolation: number
  * }} params
  */
-function render({ state, interpolation, itensToWrite }) {
+function render({ currentState, previousState, interpolation, itensToWrite }) {
     screen.clear();
     screen.write(itensToWrite);
-    screen.renderObjects(state.getGameObjects(), interpolation);
+
+    const previousGameObjects = previousState ? previousState.getGameObjects() : [];
+    screen.renderObjects(currentState.getGameObjects(), previousGameObjects, interpolation);
 }

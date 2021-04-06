@@ -19,19 +19,33 @@ export default class GameScreen {
 
     /**
      * 
-     * @param {GameObject[]} gameObjects 
+     * @param {GameObject[]} currentGameObjects 
+     * @param {GameObject[]} previousGameObjects 
+     * @param {number} interpolation
      */
-    renderObjects(gameObjects) {
+    renderObjects(currentGameObjects, previousGameObjects, interpolation) {
 
-        for (const object of gameObjects) {
-            const { width, height, color } = object;
-            const { x, y } = object.position;
+        for (const object of currentGameObjects) {
+            const { name, width, height, color } = object;
+            let { x, y } = object.position;
 
+            if (name === undefined) throw Error('name not found');
             if (x === undefined) throw Error('x not found');
             if (y === undefined) throw Error('y not found');
             if (width === undefined) throw Error('width not found');
             if (height === undefined) throw Error('height not found');
             if (color === undefined) throw Error('color not found');
+
+            if (previousGameObjects.length) {
+                const previousGo = previousGameObjects.find((go) => go.name === name);
+                if (previousGo) {
+                    const prevX = previousGo.position.x;
+                    const prevY = previousGo.position.y;
+
+                    x = x * interpolation + prevX * (1 - interpolation);
+                    y = y * interpolation + prevY * (1 - interpolation);
+                }
+            }
 
             this.context.fillStyle = color;
             this.context.fillRect(x, y, width, height);

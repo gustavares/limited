@@ -4,12 +4,14 @@ export default class GameObject {
     speed = 0.5
 
     constructor({
+        name,
         position,
         width,
         height,
         color,
         speed
     }) {
+        this.name = name;
         this.position = position || new Vector({ x: 0, y: 0 })
         this.width = width;
         this.height = height;
