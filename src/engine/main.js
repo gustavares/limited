@@ -20,14 +20,14 @@ const firstState = new State({
 
 const
     ONE_SECOND = 1000,
-    FPS = 60;
+    UPDATES_PER_SECOND = 60;
 
 const settings = {
-    currentFps: FPS,
+    currentFps: 1,
     framesThisSecond : 0,
     lastFpsUpdate: 0,
     decayRatio: 0.25,
-    MS_PER_UPDATE: Number((ONE_SECOND / FPS).toFixed(1))
+    MS_PER_UPDATE: Number((ONE_SECOND / UPDATES_PER_SECOND).toFixed(1))
 };
 const screen = new GameScreen();
 
