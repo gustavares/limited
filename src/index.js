@@ -1,15 +1,17 @@
-import {
-    start
-} from './engine/index.js';
+import { start } from './engine/index.js';
 import Vector from './engine/Vector.js';
-import GameObject from './engine/GameObject.js';
 import State from './engine/State.js';
+import Player from './Player.js';
 
-const ball = new GameObject({
+const ball = new Player({
     name: 'ball',
     position: new Vector({
         x: 50,
         y: 400
+    }),
+    speed: new Vector({
+        x: 0.5,
+        y: 0
     }),
     width: 15,
     height: 15,
