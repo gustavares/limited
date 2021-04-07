@@ -1,22 +1,6 @@
 import GameObject from "./GameObject.js";
 import GameScreen from "./Screen.js";
 import State from "./State.js";
-import Vector from "./Vector.js";
-
-const ball = new GameObject({
-    name: 'ball',
-    position: new Vector({
-        x: 50,
-        y: 400
-    }),
-    width: 15,
-    height: 15,
-    color: 'white'
-});
-const firstState = new State({
-    gameObjects: [ ball ],
-    state: 'playing'
-});
 
 const
     ONE_SECOND = 1000,
@@ -31,7 +15,13 @@ const settings = {
 };
 const screen = new GameScreen();
 
-export function start() {
+/**
+ * 
+ * @param {{
+ *  firstState: State
+ * }} param0 
+ */
+export function start({ firstState }) {
     const 
         gameStates = [firstState],
         timeStep = settings.MS_PER_UPDATE;
