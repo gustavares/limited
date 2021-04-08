@@ -3,7 +3,7 @@ import State from "./State.js";
 
 const
     ONE_SECOND = 1000,
-    UPDATES_PER_SECOND = 60;
+    UPDATES_PER_SECOND = 50;
 
 const settings = {
     currentFps: 1,
@@ -12,15 +12,15 @@ const settings = {
     decayRatio: 0.25,
     MS_PER_UPDATE: Number((ONE_SECOND / UPDATES_PER_SECOND).toFixed(1))
 };
-const screen = new GameScreen();
 
 /**
  * 
  * @param {{
  *  firstState: State
+ *  screen: GameScreen
  * }} param0 
  */
-export function start({ firstState }) {
+export function start({ firstState, screen }) {
     const 
         gameStates = [firstState],
         timeStep = settings.MS_PER_UPDATE;
@@ -56,6 +56,7 @@ export function start({ firstState }) {
             lag -= timeStep;
         }
         render(
+            screen,
             { 
                 currentState: gameStates[gameStates.length - 1], 
                 previousState: gameStates[gameStates.length - 2],
@@ -93,7 +94,7 @@ function update({ dt, state }) {
  *  interpolation: number
  * }} params
  */
-function render({ currentState, previousState, interpolation, itensToWrite }) {
+function render(screen, { currentState, previousState, interpolation, itensToWrite }) {
     screen.clear();
     screen.write(itensToWrite);
 

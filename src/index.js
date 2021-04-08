@@ -2,19 +2,17 @@ import { start } from './engine/index.js';
 import Vector from './engine/Vector.js';
 import State from './engine/State.js';
 import Player from './Player.js';
+import GameScreen from './engine/Screen.js';
 
+const screen = new GameScreen();
 const ball = new Player({
     name: 'ball',
     position: new Vector({
-        x: 50,
-        y: 400
+        x: 25,
+        y: 320
     }),
-    speed: new Vector({
-        x: 0.5,
-        y: 0
-    }),
-    width: 15,
-    height: 15,
+    width: 10,
+    height: 100,
     color: 'white'
 });
 const firstState = new State({
@@ -23,4 +21,4 @@ const firstState = new State({
 });
 
 
-start({ firstState });
+start({ firstState, screen });
