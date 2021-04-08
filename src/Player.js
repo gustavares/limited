@@ -1,7 +1,17 @@
 import GameObject from './engine/GameObject.js';
+import Keyboard, { keyCodes } from './engine/Keyboard.js';
 import Vector from './engine/Vector.js';
 
 export default class Player extends GameObject {
+    moveSpeed = 0.5;
+
+    /**
+     * 
+     * @param {{
+     *   position: Vector,
+     *   keyboard: Keyboard
+     * }} param0
+     */
     constructor({
         name,
         position,
@@ -9,6 +19,7 @@ export default class Player extends GameObject {
         width,
         height,
         color,
+        keyboard
     }) {
         super({ 
             name,
@@ -19,21 +30,36 @@ export default class Player extends GameObject {
             width, 
             height
         });
+        this.keyboard = keyboard || new Keyboard();
+    }
+
+    movement() {
+        if (this.keyboard.keyState[keyCodes.W]) {
+            return -this.moveSpeed;
+        }
+
+        if (this.keyboard.keyState[keyCodes.S]) {
+            return this.moveSpeed;
+        }
+
+        return 0;
     }
 
     update(dt) {
-        if (this.position.x <= 25 || this.position.x >= 1450) {
-            this.speed.x = -this.speed.x;
+        const speed = this.movement();
+        
+        const newPosition = this.position.plus({
+            x: 0,
+            y: speed * dt
+        });
+
+        if (newPosition.y >= 0 && newPosition.y <= 700 - this.height) {
+            return new Player({
+                ...this,
+                position: newPosition
+            });
         }
-
-        const newPosition = new Vector({
-            x: this.position.x + (this.speed.x * dt),
-            y: this.position.y
-        });
-
-        return new Player({
-            ...this,
-            position: newPosition
-        });
+        
+        return this;
     }
 }
