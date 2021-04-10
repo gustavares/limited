@@ -19,27 +19,31 @@ export default class Player extends GameObject {
         width,
         height,
         color,
-        keyboard
+        keyboard,
+        isAi = false
     }) {
         super({ 
             name,
-            type: 'player', 
+            type: 'paddle', 
             position, 
             speed,
             color, 
             width, 
             height
         });
+        this.isAi = isAi;
         this.keyboard = keyboard || new Keyboard();
     }
 
     movement() {
-        if (this.keyboard.keyState[keyCodes.W]) {
-            return -this.moveSpeed;
-        }
+        if (!this.isAi) {
+            if (this.keyboard.keyState[keyCodes.W]) {
+                return -this.moveSpeed;
+            }
 
-        if (this.keyboard.keyState[keyCodes.S]) {
-            return this.moveSpeed;
+            if (this.keyboard.keyState[keyCodes.S]) {
+                return this.moveSpeed;
+            }
         }
 
         return 0;

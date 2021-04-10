@@ -16,6 +16,18 @@ const player = new Player({
     height: 100,
     color: 'white'
 });
+const player2 = new Player({
+    name: 'player2',
+    position: new Vector({
+        x: 1470,
+        y: 320
+    }),
+    width: 10,
+    height: 100,
+    color: 'white',
+    keyboard: {},
+    isAi: true
+});
 const ball = new Ball({
     name: 'ball',
     position: new Vector({
@@ -27,7 +39,7 @@ const ball = new Ball({
     color: 'white'
 });
 const firstState = new State({
-    gameObjects: [ player, ball ],
+    gameObjects: [ player, ball, player2 ],
     state: 'playing'
 });
 
