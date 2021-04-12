@@ -1,4 +1,5 @@
 import GameObject from './engine/GameObject.js';
+import Player from './Player.js';
 import Vector from './engine/Vector.js';
 import { settings } from './index.js';
 
@@ -56,10 +57,31 @@ export default class Ball extends GameObject {
         if ( newPosition.x >= settings.screen.width - this.width) {
             // point to player2
         }
-        
+
         return new Ball({
             ...this,
             position: newPosition
         });
+    }
+
+    /**
+     * 
+     * @param {Player} player 
+     */
+    collidesWith(player, dt) {
+        const newPosition = this.position.plus({
+            x: this.speed.x * dt,
+            y: this.speed.y * dt
+        });
+ 
+        if (newPosition.x > player.position.x + player.width || player.position.x > newPosition.x + this.width ) {
+            return false;
+        }
+
+        if (newPosition.y > player.position.y + player.height || player.position.y > newPosition.y + this.height) {
+            return false;
+        }
+
+        return true;
     }
 }
