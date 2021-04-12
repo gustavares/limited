@@ -1,14 +1,13 @@
 import GameObject from './GameObject.js';
-
 const DOM = {
     canvas: document.getElementById('pong-canvas')
 };
 
 export default class GameScreen {
-    constructor() {
+    constructor({ width, height }) {
         this.canvas = DOM.canvas;
-        this.canvas.width = 1500;
-        this.canvas.height = 700;
+        this.canvas.width = width;
+        this.canvas.height = height;
         this.context = this.canvas.getContext('2d');
         
     }
