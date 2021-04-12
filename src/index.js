@@ -5,7 +5,17 @@ import Player from './Player.js';
 import Ball from './Ball.js';
 import GameScreen from './engine/Screen.js';
 
-const screen = new GameScreen();
+export const settings = {
+    screen: {
+        height: 700,
+        width: 1500
+    }
+};
+
+const screen = new GameScreen({
+    width: settings.screen.width,
+    height: settings.screen.height
+});
 const player = new Player({
     name: 'player1',
     position: new Vector({
@@ -42,6 +52,5 @@ const firstState = new State({
     gameObjects: [ player, ball, player2 ],
     state: 'playing'
 });
-
 
 start({ firstState, screen });

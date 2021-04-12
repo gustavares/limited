@@ -1,5 +1,6 @@
 import GameObject from './engine/GameObject.js';
 import Vector from './engine/Vector.js';
+import { settings } from './index.js';
 
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
@@ -44,6 +45,18 @@ export default class Ball extends GameObject {
             y: this.speed.y * dt
         });
 
+        if (newPosition.y <= 0 || newPosition.y >= settings.screen.height - this.height) {
+            this.speed.y *= -1;
+        }
+
+        if (newPosition.x <= 0) {
+            // point to player1
+        }
+
+        if ( newPosition.x >= settings.screen.width - this.width) {
+            // point to player2
+        }
+        
         return new Ball({
             ...this,
             position: newPosition
