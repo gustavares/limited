@@ -18,9 +18,10 @@ const settings = {
  * @param {{
  *  firstState: State
  *  screen: GameScreen
+ *  update: Function
  * }} param0 
  */
-export function start({ firstState, screen }) {
+export function start({ firstState, screen, update }) {
     const 
         gameStates = [firstState],
         timeStep = settings.MS_PER_UPDATE;
@@ -48,9 +49,10 @@ export function start({ firstState, screen }) {
         settings.framesThisSecond++;
 
         while (lag >= timeStep) {
-            
+
             const previousState = gameStates[gameStates.length - 1];
-            const currentState = previousState.update(timeStep);
+            const currentState = update({ state: previousState, dt: timeStep });
+            // const currentState = previousState.update(timeStep);
             gameStates.push(currentState);
             
             lag -= timeStep;

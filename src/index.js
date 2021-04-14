@@ -4,6 +4,7 @@ import State from './engine/State.js';
 import Player from './Player.js';
 import Ball from './Ball.js';
 import GameScreen from './engine/Screen.js';
+import Keyboard, { keyCodes } from './engine/Keyboard.js';
 
 export const settings = {
     screen: {
@@ -15,6 +16,11 @@ export const settings = {
 const screen = new GameScreen({
     width: settings.screen.width,
     height: settings.screen.height
+});
+
+const BALL_STARTING_POSITION =  new Vector({
+    x: screen.canvas.width / 2,
+    y: screen.canvas.height / 2
 });
 
 const firstState = new State({
@@ -43,10 +49,7 @@ const firstState = new State({
         }),
         new Ball({
             name: 'ball',
-            position: new Vector({
-                x: screen.canvas.width / 2,
-                y: screen.canvas.height / 2
-            }),
+            position: BALL_STARTING_POSITION,
             width: 15,
             height: 15,
             color: 'white'
@@ -54,6 +57,11 @@ const firstState = new State({
     ],
     state: 'playing'
 });
+
+const points = {
+    player1: 0,
+    player2: 0
+};
 
 /**
  * 
@@ -65,16 +73,41 @@ const firstState = new State({
  * @returns {State} current state
  */
 const update = ({ state, dt }) => {
-    const player1 = state.getGameObjectByName('player1');
-    const player2 = state.getGameObjectByName('player2');
-    const ball = state.getGameObjectByName('ball');
+    const player1 = state.getGameObject('player1');
+    const player2 = state.getGameObject('player2');
+    const ball = state.getGameObject('ball');
 
+    if (state.state === 'playing') {
 
-    if (ball.collidesWith(player1, dt) || ball.collidesWith(player2, dt)) {
-        ball.speed.x *= -1;
+        if (ball.speed.x === 0 && ball.speed.y === 0) {
+            ball.serve(state.player1Serve);
+        }
+        
+        if (ball.position.x <= 0) {
+            state.state = 'serving';
+            points.player1++;
+            state.player1Serve = false;
+        } else if (ball.position.x >= settings.screen.width - ball.width) {
+            state.state = 'serving';
+            points.player2++;
+            state.player1Serve = true;
+        }
+
+        if (ball.collidesWith(player1, dt) || ball.collidesWith(player2, dt)) {
+            ball.speed.x *= -1;
+        }
+        return state.update(dt);
+    } else if (state.state === 'serving') {
+        ball.reset(BALL_STARTING_POSITION);
+
+        if (state.keyboard.keyState[keyCodes.SPACE]) {
+            state.state = 'playing';
+        }
+        
+        return state;
     }
 
-    return state.update(dt);
+    
 };
 
 start({ firstState, screen, update });

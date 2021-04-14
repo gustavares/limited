@@ -84,4 +84,20 @@ export default class Ball extends GameObject {
 
         return true;
     }
+
+    reset(position) {
+        this.position.x = position.x || 0;
+        this.position.y = position.y || 0;
+        this.speed.x = 0;
+        this.speed.y = 0; 
+    }
+
+    serve(player1Serve) {
+        const direction = player1Serve ? -1 : 1;
+
+        this.speed = new Vector({
+            x: getRandomArbitrary(0.5, 0.7) * direction, 
+            y: getRandomArbitrary(0.3, 0.5) * getRandomDirection()
+        });
+    }
 }

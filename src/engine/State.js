@@ -1,4 +1,5 @@
 import GameObject from "./GameObject.js";
+import Keyboard from "./Keyboard.js";
 
 export default class State {
 
@@ -9,13 +10,23 @@ export default class State {
      *  state: State
      * }} param0 
      */
-    constructor({ gameObjects, state }) {
+    constructor({ gameObjects, state, player1Serve }) {
         this.gameObjects = gameObjects;
         this.state = state;
+        this.keyboard = new Keyboard();
+        this.player1Serve = player1Serve;
     }
 
     setGameObjects(go) {
         this.gameObjects = go;
+    }
+
+    getGameObject(name) {
+        return this.gameObjects.find((go) => go.name === name);
+    }
+
+    getGameObjectsByType(type) {
+        return this.gameObjects.map((go) => go.type === type);
     }
 
     /**
@@ -35,6 +46,6 @@ export default class State {
             updatedGameObjects.push(go.update(dt));
         }
 
-        return new State({ gameObjects: updatedGameObjects, state: this.state });
+        return new State({ ...this, gameObjects: updatedGameObjects });
     }
 }
