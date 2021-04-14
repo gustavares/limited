@@ -96,6 +96,15 @@ const update = ({ state, dt }) => {
         if (ball.collidesWith(player1, dt) || ball.collidesWith(player2, dt)) {
             ball.speed.x *= -1;
         }
+
+        if (ball.speed.x > 0) {
+            if (ball.position.y > player2.position.y + 50) {
+                player2.speed.x = player2.moveSpeed;
+            } else if (ball.position.y < player2.position.y + 50) {
+                player2.speed.x = -player2.moveSpeed;
+            }
+        }
+
         return state.update(dt);
     } else if (state.state === 'serving') {
         ball.reset(BALL_STARTING_POSITION);

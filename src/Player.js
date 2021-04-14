@@ -36,25 +36,25 @@ export default class Player extends GameObject {
     }
 
     movement() {
-        if (!this.isAi) {
-            if (this.keyboard.keyState[keyCodes.W]) {
-                return -this.moveSpeed;
-            }
-
-            if (this.keyboard.keyState[keyCodes.S]) {
-                return this.moveSpeed;
-            }
+        if (this.keyboard.keyState[keyCodes.W]) {
+            return -this.moveSpeed;
         }
 
+        if (this.keyboard.keyState[keyCodes.S]) {
+            return this.moveSpeed;
+        }
+        
         return 0;
     }
 
     update(dt) {
-        const speed = this.movement();
-        
+        if (!this.isAi) {
+            this.speed.x = this.movement();
+        }
+
         const newPosition = this.position.plus({
             x: 0,
-            y: speed * dt
+            y: this.speed.x * dt
         });
 
         if (newPosition.y >= 0 && newPosition.y <= 700 - this.height) {
@@ -63,6 +63,7 @@ export default class Player extends GameObject {
                 position: newPosition
             });
         }
+        
         
         return this;
     }
