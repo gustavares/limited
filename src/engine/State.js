@@ -41,6 +41,14 @@ export default class State {
         return this.textObjects.find((to) => to.label === label);
     }
 
+    deleteTextObject(label) {
+        const index = this.textObjects.findIndex((to) => to.label === label);
+        
+        if (index !== -1) {
+            this.textObjects.splice(index, 1);
+        }
+    }
+
     /**
      * @param {number} dt 
      * @returns {State}

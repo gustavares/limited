@@ -129,12 +129,14 @@ const update = ({ state, dt }) => {
             state.textObjects.push(new Text({
                 content: 'Player 1 WON!',
                 ...WINNING_MESSAGE_PARAMS
-            }))
-        } else if (points.player2 === 10) {
+            }));
+            state.state = 'final';
+        } else if (points.player2 === 1) {
             state.textObjects.push(new Text({
                 content: 'Player 2 WON!',
                 ...WINNING_MESSAGE_PARAMS
-            }))
+            }));
+            state.state = 'final';
         }
 
         if (ball.collidesWith(player1, dt) || ball.collidesWith(player2, dt)) {
@@ -160,9 +162,22 @@ const update = ({ state, dt }) => {
         }
         
         return state;
-    }
+    } else if (state.state === 'final') {
+        ball.reset(BALL_STARTING_POSITION);
 
-    
+        if (state.keyboard.keyState[keyCodes.SPACE]) {
+            points.player1 = 0;
+            points.player2 = 0;
+
+            state.getTextObject('player1Score').content = 0;
+            state.getTextObject('player2Score').content = 0;
+            state.deleteTextObject('winningMessage');
+
+            state.state = 'playing';
+        }
+
+        return state;
+    }
 };
 
 start({ firstState, screen, update });
