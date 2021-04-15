@@ -1,6 +1,6 @@
-import GameObject from './engine/GameObject.js';
+import GameObject from './../../../src/GameObject.js';
 import Player from './Player.js';
-import Vector from './engine/Vector.js';
+import Vector from './../../../src/Vector.js';
 import { settings } from './index.js';
 
 function getRandomArbitrary(min, max) {
