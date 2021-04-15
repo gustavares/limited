@@ -100,4 +100,11 @@ export default class Ball extends GameObject {
             y: getRandomArbitrary(0.3, 0.5) * getRandomDirection()
         });
     }
+
+    serveRandom() {
+        this.speed =  new Vector({
+            x: getRandomArbitrary(0.5, 0.7) * getRandomDirection(), 
+            y: getRandomArbitrary(0.3, 0.5) * getRandomDirection()
+        });
+    }
 }
