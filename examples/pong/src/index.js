@@ -86,7 +86,7 @@ const points = {
     player1: 0,
     player2: 0
 };
-
+let player1Serve = true; 
 /**
  * 
  * @param {{
@@ -105,7 +105,7 @@ const update = ({ state, dt }) => {
 
         if (ball.speed.x === 0 && ball.speed.y === 0) {
             if (points.player1 !== 0 || points.player2 !== 0) {            
-                ball.serve(state.player1Serve);
+                ball.serve(player1Serve);
             } else {
                 ball.serveRandom();
             }
@@ -116,13 +116,13 @@ const update = ({ state, dt }) => {
             points.player2++;
             const scoreText = state.getTextObject('player2Score');
             scoreText.content = points.player2.toString();
-            state.player1Serve = true;
+            player1Serve = true;
         } else if (ball.position.x >= settings.screen.width - ball.width) {
             state.state = 'serving';
             points.player1++;
             const scoreText = state.getTextObject('player1Score');
             scoreText.content = points.player1.toString();
-            state.player1Serve = false;
+            player1Serve = false;
         }
 
         if (points.player1 === 5) {
