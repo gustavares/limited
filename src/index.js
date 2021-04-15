@@ -79,7 +79,7 @@ const firstState = new State({
             font: '36px verdana'
         })
     ],
-    state: 'playing'
+    state: 'serving'
 });
 
 const points = {
@@ -104,7 +104,11 @@ const update = ({ state, dt }) => {
     if (state.state === 'playing') {
 
         if (ball.speed.x === 0 && ball.speed.y === 0) {
-            ball.serve(state.player1Serve);
+            if (points.player1 !== 0 || points.player2 !== 0) {            
+                ball.serve(state.player1Serve);
+            } else {
+                ball.serveRandom();
+            }
         }
         
         if (ball.position.x <= 0) {
