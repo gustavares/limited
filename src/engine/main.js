@@ -1,5 +1,6 @@
 import GameScreen from "./Screen.js";
 import State from "./State.js";
+import Text from './Text.js';
 
 const
     ONE_SECOND = 1000,
@@ -57,14 +58,21 @@ export function start({ firstState, screen, update }) {
             
             lag -= timeStep;
         }
+
+        const currentState = gameStates[gameStates.length - 1];
         render(
             screen,
             { 
-                currentState: gameStates[gameStates.length - 1], 
+                currentState: currentState, 
                 previousState: gameStates[gameStates.length - 2],
-                itensToWrite: {
-                    'FPS': Math.round(settings.currentFps)
-                },
+                texts: [
+                    new Text({ 
+                        content: `FPS: ${Math.round(settings.currentFps)}`,
+                        position: { x: 1400, y: 30 },
+                        label: 'FPS'
+                    }),
+                    ...currentState.textObjects
+                ],
                 interpolation:  lag / settings.MS_PER_UPDATE
             }
         );
@@ -92,13 +100,13 @@ function update({ dt, state }) {
  * @param {{
  *  currentState: State
  *  previousState: State
- *  itemsToWrite: Object
+ *  texts: Text[]
  *  interpolation: number
  * }} params
  */
-function render(screen, { currentState, previousState, interpolation, itensToWrite }) {
+function render(screen, { currentState, previousState, interpolation, texts }) {
     screen.clear();
-    screen.write(itensToWrite);
+    screen.write(texts);
 
     const previousGameObjects = previousState ? previousState.getGameObjects() : [];
     screen.renderObjects(currentState.getGameObjects(), previousGameObjects, interpolation);

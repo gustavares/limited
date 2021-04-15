@@ -1,4 +1,6 @@
 import GameObject from './GameObject.js';
+import Text from './Text.js';
+
 const DOM = {
     canvas: document.getElementById('pong-canvas')
 };
@@ -51,12 +53,13 @@ export default class GameScreen {
         }
     }
 
-    write(labelValueMap) {
-        let y = 30;
-        this.context.font = '18px verdana';
-        for (const label in labelValueMap) {
-            this.context.fillText(`${label}: ${labelValueMap[label]}`, 1410, y);
-            y += 30;
+    /**
+     * 
+     * @param {Text[]} texts 
+     */
+    write(texts) {
+        for (const text of texts) {
+            text.write(this.context);
         }
     }
 }

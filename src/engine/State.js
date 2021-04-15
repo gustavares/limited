@@ -10,8 +10,9 @@ export default class State {
      *  state: State
      * }} param0 
      */
-    constructor({ gameObjects, state, player1Serve }) {
+    constructor({ gameObjects, textObjects, state, player1Serve }) {
         this.gameObjects = gameObjects;
+        this.textObjects = textObjects;
         this.state = state;
         this.keyboard = new Keyboard();
         this.player1Serve = player1Serve;
@@ -34,6 +35,10 @@ export default class State {
      */
     getGameObjects() {
         return this.gameObjects;
+    }
+
+    getTextObject(label) {
+        return this.textObjects.find((to) => to.label === label);
     }
 
     /**
