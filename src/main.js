@@ -4,7 +4,7 @@ import Text from './Text.js';
 
 const
     ONE_SECOND = 1000,
-    UPDATES_PER_SECOND = 50;
+    UPDATES_PER_SECOND = 60;
 
 const settings = {
     currentFps: 1,
