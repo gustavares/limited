@@ -1,21 +1,28 @@
-x moving avg for fps
+ENGINE
 
-- interpolation
-    - handle extrapolation
+[ ] rename github project to limitedjs
 
-- user input
+[ ] rename engine folder to limited and improve exporting
+
+[ ] create folder for example games
+
+[ ] create method to delete game objects
+
+[ ] handle extrapolation
 
 PONG 
-- player 1 and 2 objects
+X player 1 and 2 objects
 
-- player 1 movement
+X player 1 movement
 
-- ball object
+X ball object
 
-- ball movement
+X ball movement
 
-- collisions
+X collisions
 
-- AI movement
+X AI movement
 
-- score
+X score
+
+[ ] add message on "serving" state to press space bar to serve
