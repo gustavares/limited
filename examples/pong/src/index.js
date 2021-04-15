@@ -125,13 +125,13 @@ const update = ({ state, dt }) => {
             state.player1Serve = false;
         }
 
-        if (points.player1 === 10) {
+        if (points.player1 === 5) {
             state.textObjects.push(new Text({
                 content: 'Player 1 WON!',
                 ...WINNING_MESSAGE_PARAMS
             }));
             state.state = 'final';
-        } else if (points.player2 === 1) {
+        } else if (points.player2 === 5) {
             state.textObjects.push(new Text({
                 content: 'Player 2 WON!',
                 ...WINNING_MESSAGE_PARAMS
