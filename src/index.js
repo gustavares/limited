@@ -103,6 +103,8 @@ const update = ({ state, dt }) => {
             } else if (ball.position.y < player2.position.y + 50) {
                 player2.speed.x = -player2.moveSpeed;
             }
+        } else {
+            player2.speed.x = 0;
         }
 
         return state.update(dt);
