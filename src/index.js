@@ -5,6 +5,7 @@ import Player from './Player.js';
 import Ball from './Ball.js';
 import GameScreen from './engine/Screen.js';
 import Keyboard, { keyCodes } from './engine/Keyboard.js';
+import Text from './engine/Text.js';
 
 export const settings = {
     screen: {
@@ -22,6 +23,15 @@ const BALL_STARTING_POSITION =  new Vector({
     x: screen.canvas.width / 2,
     y: screen.canvas.height / 2
 });
+
+const WINNING_MESSAGE_PARAMS = {
+    label: "winningMessage",            
+    font: '48px verdana',
+    position: new Vector({ 
+        x: (settings.screen.width / 2) - 160, 
+        y: (settings.screen.height / 2) - 50
+    }
+)};
 
 const firstState = new State({
     gameObjects: [ 
@@ -55,6 +65,20 @@ const firstState = new State({
             color: 'white'
         })
     ],
+    textObjects: [
+        new Text({
+            content: '0',
+            label: 'player1Score',
+            position: { x: (settings.screen.width / 2) - 140, y: 50 },
+            font: '36px verdana'
+        }),
+        new Text({
+            content: '0',
+            label: 'player2Score',
+            position: { x: (settings.screen.width / 2) + 110, y: 50 },
+            font: '36px verdana'
+        })
+    ],
     state: 'playing'
 });
 
@@ -85,12 +109,28 @@ const update = ({ state, dt }) => {
         
         if (ball.position.x <= 0) {
             state.state = 'serving';
-            points.player1++;
-            state.player1Serve = false;
+            points.player2++;
+            const scoreText = state.getTextObject('player2Score');
+            scoreText.content = points.player2.toString();
+            state.player1Serve = true;
         } else if (ball.position.x >= settings.screen.width - ball.width) {
             state.state = 'serving';
-            points.player2++;
-            state.player1Serve = true;
+            points.player1++;
+            const scoreText = state.getTextObject('player1Score');
+            scoreText.content = points.player1.toString();
+            state.player1Serve = false;
+        }
+
+        if (points.player1 === 10) {
+            state.textObjects.push(new Text({
+                content: 'Player 1 WON!',
+                ...WINNING_MESSAGE_PARAMS
+            }))
+        } else if (points.player2 === 10) {
+            state.textObjects.push(new Text({
+                content: 'Player 2 WON!',
+                ...WINNING_MESSAGE_PARAMS
+            }))
         }
 
         if (ball.collidesWith(player1, dt) || ball.collidesWith(player2, dt)) {

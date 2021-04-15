@@ -93,7 +93,7 @@ export default class Ball extends GameObject {
     }
 
     serve(player1Serve) {
-        const direction = player1Serve ? -1 : 1;
+        const direction = player1Serve ? 1 : -1;
 
         this.speed = new Vector({
             x: getRandomArbitrary(0.5, 0.7) * direction, 
