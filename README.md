@@ -12,6 +12,8 @@ LIMITED is a limited Javascript HTML5 Canvas game engine meant for learning purp
 
 - [ ] create method to delete game objects
 
+- [ ] setup github project management tab
+
 - [ ] handle extrapolation
 
 ### PONG 
