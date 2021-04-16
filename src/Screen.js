@@ -1,13 +1,9 @@
 import GameObject from './GameObject.js';
 import Text from './Text.js';
 
-const DOM = {
-    canvas: document.getElementById('pong-canvas')
-};
-
 export default class GameScreen {
-    constructor({ width, height }) {
-        this.canvas = DOM.canvas;
+    constructor({ canvasId, width, height }) {
+        this.canvas = document.getElementById(canvasId);
         this.canvas.width = width;
         this.canvas.height = height;
         this.context = this.canvas.getContext('2d');
