@@ -1,0 +1,30 @@
+{
+  "name": "limited",
+  "version": "0.1.0",
+  "description": "LIMITED is a limited Javascript HTML5 Canvas game engine meant for learning purposes.",
+  "main": "./src/index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustavares/limited.git"
+  },
+  "keywords": [],
+  "author": "Gus Tavares",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gustavares/limited/issues"
+  },
+  "homepage": "https://github.com/gustavares/limited#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0"
+  }
+}
