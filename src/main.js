@@ -84,19 +84,6 @@ export function start({ firstState, screen, update }) {
 }
 
 /**
- * 
- * @param {{
- *  dt: number,
- *  state: State
- * }} param0 
- */
-function update({ dt, state }) {
-    console.log(dt);
-
-    return state.update(dt);
-}
-
-/**
  * @param {{
  *  currentState: State
  *  previousState: State
