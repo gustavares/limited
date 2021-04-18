@@ -1,6 +1,5 @@
-import GameObject from './../../../src/GameObject.js';
+import { GameObject, Vector } from './limited.js';
 import Player from './Player.js';
-import Vector from './../../../src/Vector.js';
 import { settings } from './index.js';
 
 function getRandomArbitrary(min, max) {

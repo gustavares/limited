@@ -1,6 +1,4 @@
-import GameObject from './../../../src/GameObject.js';
-import Keyboard, { keyCodes } from './../../../src/Keyboard.js'
-import Vector from './../../../src/Vector.js';
+import { GameObject, keyCodes, Keyboard, Vector } from './limited.js';
 
 export default class Player extends GameObject {
     moveSpeed = 0.5;

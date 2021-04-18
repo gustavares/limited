@@ -1,11 +1,6 @@
-import { start } from './../../../src/index.js';
-import Vector from './../../../src/Vector.js';
-import State from './../../../src/State.js';
+import { start, GameScreen, Vector, Text, State, keyCodes } from './limited.js';
 import Player from './Player.js';
 import Ball from './Ball.js';
-import GameScreen from './../../../src/Screen.js';
-import { keyCodes } from './../../../src/Keyboard.js';
-import Text from './../../../src/Text.js';
 
 export const settings = {
     screen: {
@@ -15,6 +10,7 @@ export const settings = {
 };
 
 const screen = new GameScreen({
+    canvasId: 'pong-canvas',
     width: settings.screen.width,
     height: settings.screen.height
 });
