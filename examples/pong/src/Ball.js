@@ -1,4 +1,4 @@
-import { GameObject, Vector } from './limited.js';
+import { GameObject, Vector } from './../../../dist/limited.js';
 import Player from './Player.js';
 import { settings } from './index.js';
 

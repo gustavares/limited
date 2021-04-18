@@ -1,4 +1,4 @@
-import { GameObject, keyCodes, Keyboard, Vector } from './limited.js';
+import { GameObject, keyCodes, Keyboard, Vector } from './../../../dist/limited.js';
 
 export default class Player extends GameObject {
     moveSpeed = 0.5;

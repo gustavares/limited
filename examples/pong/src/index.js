@@ -1,4 +1,4 @@
-import { start, GameScreen, Vector, Text, State, keyCodes } from './limited.js';
+import { start, GameScreen, Vector, Text, State, keyCodes } from './../../../dist/limited.js';
 import Player from './Player.js';
 import Ball from './Ball.js';
 
