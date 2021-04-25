@@ -23,13 +23,13 @@ const settings = {
  * }} param0 
  */
 export function start({ firstState, screen, update }) {
-    const 
-        gameStates = [firstState],
-        timeStep = settings.MS_PER_UPDATE;
+    const timeStep = settings.MS_PER_UPDATE;
     
     let lag = 0.0, 
         previousTime = window.performance.now();
-
+    let currentState = firstState; 
+    let previousState;
+    
     const gameLoop = (currentTime) => {
         const elapsedTime = currentTime - previousTime;
         previousTime = currentTime;
@@ -51,20 +51,16 @@ export function start({ firstState, screen, update }) {
 
         while (lag >= timeStep) {
 
-            const previousState = gameStates[gameStates.length - 1];
-            const currentState = update({ state: previousState, dt: timeStep });
-            // const currentState = previousState.update(timeStep);
-            gameStates.push(currentState);
-            
+            previousState = currentState;
+            currentState = update({ state: previousState, dt: timeStep });
             lag -= timeStep;
         }
 
-        const currentState = gameStates[gameStates.length - 1];
         render(
             screen,
             { 
-                currentState: currentState, 
-                previousState: gameStates[gameStates.length - 2],
+                currentState,
+                previousState,
                 texts: [
                     new Text({ 
                         content: `FPS: ${Math.round(settings.currentFps)}`,
