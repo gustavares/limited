@@ -19,6 +19,13 @@ export default class GameObject {
         this.speed = speed || new Vector({ x: 0, y: 0});
     }
 
+    getCenter() {
+        return new Vector({
+            x: this.position.x + this.width / 2,
+            y: this.position.y + this.height / 2
+        })
+    }
+
     update(dt) {
         return new GameObject({
             ...this,
