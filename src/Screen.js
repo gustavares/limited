@@ -23,7 +23,7 @@ export default class GameScreen {
     renderObjects(currentGameObjects, previousGameObjects, interpolation) {
 
         for (const object of currentGameObjects) {
-            const { name, width, height, color } = object;
+            const { name, width, height, color, sprite } = object;
             let { x, y } = object.position;
 
             if (name === undefined) throw Error('name not found');
@@ -44,8 +44,14 @@ export default class GameScreen {
                 }
             }
 
-            this.context.fillStyle = color;
-            this.context.fillRect(x, y, width, height);
+        
+            if (sprite !== undefined) {
+               const spritePosition = sprite.getCurrentSpritePosition(object);
+               this.context.drawImage(sprite, spritePosition.x * width, spritePosition.y * height, sprite.width, sprite.height, x, y, width, height);
+            } else {
+                this.context.fillStyle = color;
+                this.context.fillRect(x, y, width, height);
+            }
         }
     }
 

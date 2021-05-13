@@ -13,6 +13,7 @@ const settings = {
     decayRatio: 0.25,
     MS_PER_UPDATE: Number((ONE_SECOND / UPDATES_PER_SECOND).toFixed(1))
 };
+export let framesRendered = 0;
 
 /**
  * 
@@ -56,6 +57,7 @@ export function start({ firstState, screen, update }) {
             lag -= timeStep;
         }
 
+        framesRendered++;
         render(
             screen,
             { 

@@ -1,8 +1,8 @@
-import { GameObject, keyCodes, Keyboard, Vector, State } from './../../../dist/limited.js';
+import { GameObject, keyCodes, Keyboard, Vector, State, Sprite, framesRendered } from './../../../dist/limited.js';
 import { GRAVITY } from './index.js';
 
 export default class Player extends GameObject {
-    moveSpeed = 0.5; canJump = true;
+    moveSpeed = 0.2; canJump = true;
 
     /**
      * 
@@ -30,7 +30,24 @@ export default class Player extends GameObject {
             speed,
             color, 
             width, 
-            height
+            height,
+            sprite: new Sprite({
+                width: 69, 
+                height: 44,
+                column: 0,
+                row: 3,
+                spriteSheetWidth: 414,
+                spriteSheetHeight: 748,
+                maxFramesPerRow: 6,
+                numberOfRows: 17,
+                src: 'images/Warrior_Sheet-Effect.png',
+                animationStates: [
+                    {
+                        name:'idle',
+                        frames: 6
+                    }
+                ]
+            })
         });
         this.isOnGround = isOnGround;
         this.state = state;
@@ -51,7 +68,7 @@ export default class Player extends GameObject {
 
     jump() {
         if (this.keyboard.keyState[keyCodes.SPACE]) {
-            return -1;
+            return -0.5;
         }
 
         return 0;

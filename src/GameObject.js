@@ -8,7 +8,8 @@ export default class GameObject {
         width,
         height,
         color,
-        speed
+        speed,
+        sprite
     }) {
         this.name = name;
         this.type = type;
@@ -17,6 +18,7 @@ export default class GameObject {
         this.height = height;
         this.color = color;
         this.speed = speed || new Vector({ x: 0, y: 0});
+        this.sprite = sprite;
     }
 
     getCenter() {

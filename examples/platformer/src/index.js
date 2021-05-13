@@ -24,8 +24,8 @@ const firstState = new State({
                 x: 250,
                 y: 320
             }),
-            width: 10,
-            height: 30,
+            width: 69, 
+            height: 44,
             color: 'white'
         }),
         new Platform({
@@ -35,7 +35,7 @@ const firstState = new State({
                 y: settings.screen.height - 10
             }),
             width: settings.screen.width,
-            height: 15,
+            height: 150,
             color: 'red'
         }),
         new Platform({
