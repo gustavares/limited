@@ -21,7 +21,7 @@ const firstState = new State({
         new Player({
             name: 'player',
             position: new Vector({
-                x: 250,
+                x: 100,
                 y: 320
             }),
             width: 69, 
