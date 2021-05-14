@@ -21,7 +21,8 @@ export default class Player extends GameObject {
         color,
         state,
         keyboard = new Keyboard(),
-        isOnGround = false
+        isOnGround = false,
+        sprite
     }) {
         super({ 
             name,
@@ -31,7 +32,7 @@ export default class Player extends GameObject {
             color, 
             width, 
             height,
-            sprite: new SpriteSheet({
+            sprite: sprite || new SpriteSheet({
                 spriteSheetWidth: 414,
                 spriteSheetHeight: 748,
                 numberOfSprites: 99,
@@ -43,12 +44,10 @@ export default class Player extends GameObject {
                     {
                         name:'idle',
                         frames: 6,
-                        firstFrameIndex: {x: 0, y: 0}
                     },
                     {
                         name: 'running',
                         frames: 8,
-                        firstFrameIndex: {x: 1, y: 1}
                     }
                 ]
             })
@@ -151,9 +150,18 @@ export default class Player extends GameObject {
             }
         }
 
-        return new Player({
-            ...this,
-            position
-        });
+        if (this.isOnGround) {
+            if (this.speed.x > 0 ) {
+                this.sprite.currentAnimationStateName = 'running';
+                this.sprite.reverse = true;
+            } else if (this.speed.x < 0) {
+                this.sprite.currentAnimationStateName = 'running';
+                this.sprite.reverse = false;
+            } else {
+                this.sprite.currentAnimationStateName = 'idle';
+            }
+        }
+
+        this.position = position;
     }
 }
