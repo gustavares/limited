@@ -23,8 +23,8 @@ export default class GameScreen {
     renderObjects(currentGameObjects, previousGameObjects, interpolation) {
 
         for (const object of currentGameObjects) {
-            const { name, width, height, color, sprite } = object;
-            let { x, y } = object.position;
+            const { name, width, height, color, sprite, currentAnimationStateName, position } = object;
+            let { x, y } = position;
 
             if (name === undefined) throw Error('name not found');
             if (x === undefined) throw Error('x not found');
@@ -46,7 +46,7 @@ export default class GameScreen {
 
         
             if (sprite !== undefined) {
-               const spritePosition = sprite.getCurrentSpritePosition(object);
+               const spritePosition = sprite.getCurrentSpritePosition();
                this.context.drawImage(sprite, spritePosition.x * width, spritePosition.y * height, sprite.width, sprite.height, x, y, width, height);
             } else {
                 this.context.fillStyle = color;

@@ -1,4 +1,4 @@
-import { GameObject, keyCodes, Keyboard, Vector, State, Sprite, framesRendered } from './../../../dist/limited.js';
+import { GameObject, keyCodes, Keyboard, Vector, State, SpriteSheet, framesRendered } from './../../../dist/limited.js';
 import { GRAVITY } from './index.js';
 
 export default class Player extends GameObject {
@@ -31,20 +31,24 @@ export default class Player extends GameObject {
             color, 
             width, 
             height,
-            sprite: new Sprite({
-                width: 69, 
-                height: 44,
-                column: 0,
-                row: 3,
+            sprite: new SpriteSheet({
                 spriteSheetWidth: 414,
                 spriteSheetHeight: 748,
-                maxFramesPerRow: 6,
+                numberOfSprites: 99,
+                maxSpritesPerRow: 6,
                 numberOfRows: 17,
                 src: 'images/Warrior_Sheet-Effect.png',
+                currentAnimationStateName: 'running',
                 animationStates: [
                     {
                         name:'idle',
-                        frames: 6
+                        frames: 6,
+                        firstFrameIndex: {x: 0, y: 0}
+                    },
+                    {
+                        name: 'running',
+                        frames: 8,
+                        firstFrameIndex: {x: 1, y: 1}
                     }
                 ]
             })
@@ -120,7 +124,6 @@ export default class Player extends GameObject {
                 }
             }
         }
-
 
         if (collision.bottom) {
             position.y = collision.object.position.y - this.height;
