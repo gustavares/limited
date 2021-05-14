@@ -53,7 +53,8 @@ export function start({ firstState, screen, update }) {
         while (lag >= timeStep) {
 
             previousState = currentState;
-            currentState = update({ state: previousState, dt: timeStep });
+            update({ state: currentState, dt: timeStep});
+            currentState.update(timeStep);
             lag -= timeStep;
         }
 

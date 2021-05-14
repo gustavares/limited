@@ -53,11 +53,6 @@ export default class State {
      * @returns {State}
      */
     update(dt) {
-        const updatedGameObjects = [];
-        for (const go of this.gameObjects) {
-            updatedGameObjects.push(go.update(dt));
-        }
-
-        return new State({ ...this, gameObjects: updatedGameObjects });
+        this.gameObjects.forEach(go => go.update(dt));
     }
 }

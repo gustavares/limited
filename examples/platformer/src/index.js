@@ -21,7 +21,7 @@ const firstState = new State({
         new Player({
             name: 'player',
             position: new Vector({
-                x: 100,
+                x: 200,
                 y: 320
             }),
             width: 69, 
@@ -41,7 +41,7 @@ const firstState = new State({
         new Platform({
             name: 'platform1',
             position: new Vector({
-                x: 100,
+                x: 200,
                 y: 500
             }),
             width: 200,
@@ -59,7 +59,7 @@ const player = firstState.getGameObject('player');
 player.state = firstState;
 
 const update = ({ state, dt }) => {
-    return state.update(dt);
+    
 }
 
 start({

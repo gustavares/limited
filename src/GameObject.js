@@ -29,12 +29,9 @@ export default class GameObject {
     }
 
     update(dt) {
-        return new GameObject({
-            ...this,
-            position: new Vector({
-                x: this.position.x + (this.speed.x * dt),
-                y: this.position.y + (this.speed.y * dt)
-            }),
-        })
+        this.position = new Vector({
+            x: this.position.x + (this.speed.x * dt),
+            y: this.position.y + (this.speed.y * dt)
+        });
     }
 }
