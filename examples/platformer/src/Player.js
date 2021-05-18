@@ -172,7 +172,6 @@ export default class Player extends GameObject {
             } else if (this.speed.x < 0) {
                 this.sprite.currentAnimationStateName = 'running';
             } else {
-                console.log(this.sprite.getCurrentSpritePosition());
                 this.sprite.currentAnimationStateName = 'idle';
             }
         } else {
