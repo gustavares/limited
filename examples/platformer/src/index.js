@@ -24,7 +24,7 @@ const firstState = new State({
                 x: 200,
                 y: 320
             }),
-            width: 69, 
+            width: 64, 
             height: 44,
             color: 'white'
         }),

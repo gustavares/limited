@@ -33,21 +33,37 @@ export default class Player extends GameObject {
             width, 
             height,
             sprite: sprite || new SpriteSheet({
-                spriteSheetWidth: 414,
-                spriteSheetHeight: 748,
+                spriteSheetWidth: 768,
+                spriteSheetHeight: 264,
                 numberOfSprites: 99,
-                maxSpritesPerRow: 6,
-                numberOfRows: 17,
-                src: 'images/Warrior_Sheet-Effect.png',
-                currentAnimationStateName: 'running',
+                maxSpritesPerRow: 12,
+                numberOfRows: 6,
+                src: 'images/newspritesheet.png',
+                currentAnimationStateName: 'idle',
                 animationStates: [
+                    {
+                        name: 'attacking',
+                        frames: 12
+                    },
+                    {
+                        name: 'jumping',
+                        frames: 3
+                    },
+                    {
+                        name: 'running',
+                        frames: 8,
+                    },
                     {
                         name:'idle',
                         frames: 6,
                     },
                     {
-                        name: 'running',
-                        frames: 8,
+                        name: 'upandfall',
+                        frames: 2
+                    },
+                    {
+                        name: 'falling',
+                        frames: 3
                     }
                 ]
             })
@@ -151,14 +167,21 @@ export default class Player extends GameObject {
         }
 
         if (this.isOnGround) {
-            if (this.speed.x > 0 ) {
+            if (this.speed.x > 0) {
                 this.sprite.currentAnimationStateName = 'running';
-                this.sprite.reverse = true;
             } else if (this.speed.x < 0) {
                 this.sprite.currentAnimationStateName = 'running';
-                this.sprite.reverse = false;
             } else {
+                console.log(this.sprite.getCurrentSpritePosition());
                 this.sprite.currentAnimationStateName = 'idle';
+            }
+        } else {
+            if (this.speed.y > 0) {
+                this.sprite.currentAnimationStateName = 'jumping'
+            } else if (this.speed.y < 0) {
+                this.sprite.currentAnimationStateName = 'falling';
+            } else {
+                this.sprite.currentAnimationStateName = 'upandfall'
             }
         }
 
