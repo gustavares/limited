@@ -27,15 +27,12 @@ export default class SpriteSheet extends Image {
         const currentStateIndex = this.animationStates.findIndex((state) => state.name === this.currentAnimationStateName);
         const currentState = this.animationStates[currentStateIndex];
         
+        // todo: if the animation just started should render from the first sprite in the animation sequence
         const currentAnimationFrame = Math.floor(framesRendered/STAGGER_FRAMES) % currentState.frames;
-        const x = currentAnimationFrame % this.maxSpritesPerRow;
-
-        const firstAnimationSprite = this.animationStates.filter((state, index) => index < currentStateIndex).reduce((totalFrames, state) => totalFrames + state.frames, 0);
-        const y = Math.floor((firstAnimationSprite + currentAnimationFrame) / this.maxSpritesPerRow);
 
         return {
-            x,
-            y
+            x: currentAnimationFrame,
+            y: currentStateIndex
         }
     }
 }
