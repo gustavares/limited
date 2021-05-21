@@ -1,6 +1,6 @@
 {
   "name": "limited",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "LIMITED is a limited Javascript HTML5 Canvas game engine meant for learning purposes.",
   "type": "module",
   "directories": {
@@ -9,8 +9,9 @@
   "source": "src/index.js",
   "module": "dist/limited.js",
   "scripts": {
-    "build": "microbundle", 
-    "dev": "microbundle watch"
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "postversion": "git push --follow-tags"
   },
   "repository": {
     "type": "git",
