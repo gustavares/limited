@@ -28,7 +28,7 @@ export default class SpriteSheet extends Image {
         const currentState = this.animationStates[currentStateIndex];
         
         // todo: if the animation just started should render from the first sprite in the animation sequence
-        const currentAnimationFrame = Math.floor(framesRendered/STAGGER_FRAMES) % currentState.frames;
+        const currentAnimationFrame = Math.floor(framesRendered/STAGGER_FRAMES) % currentState.numberOfFrames;
 
         return {
             x: currentAnimationFrame,
