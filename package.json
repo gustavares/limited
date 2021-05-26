@@ -1,6 +1,6 @@
 {
   "name": "limited",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "LIMITED is a limited Javascript HTML5 Canvas game engine meant for learning purposes.",
   "type": "module",
   "source": "src/index.js",

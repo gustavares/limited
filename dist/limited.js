@@ -1,2 +1,381 @@
-var t=function(){function t(t){var e=t.y;this.x=t.x,this.y=e}return t.prototype.plus=function(e){return new t({x:this.x+e.x,y:this.y+e.y})},t}(),e=function(){function e(e){var n=e.type,r=e.position,i=e.width,o=e.height,a=e.color,s=e.speed,c=e.sprite;this.name=e.name,this.type=n,this.position=r||new t({x:0,y:0}),this.width=i,this.height=o,this.color=a,this.speed=s||new t({x:0,y:0}),this.sprite=c}var n=e.prototype;return n.getCenter=function(){return new t({x:this.position.x+this.width/2,y:this.position.y+this.height/2})},n.update=function(e){this.position=new t({x:this.position.x+this.speed.x*e,y:this.position.y+this.speed.y*e})},e}(),n={UP:38,DOWN:40,RIGHT:39,LEFT:37,W:87,A:65,S:83,D:68,SPACE:32},r=function(){var t=this;this.keyState={},this.keyDownHandler=function(e){e.preventDefault(),t.keyState[e.keyCode||e.which]=!0},this.keyUpHandler=function(e){e.preventDefault(),t.keyState[e.keyCode||e.which]=!1},window.addEventListener("keydown",this.keyDownHandler),window.addEventListener("keyup",this.keyUpHandler)},i=function(){function t(t){var e=t.textObjects,n=t.state;this.gameObjects=t.gameObjects,this.textObjects=e,this.state=n,this.keyboard=new r}var e=t.prototype;return e.setGameObjects=function(t){this.gameObjects=t},e.getGameObject=function(t){return this.gameObjects.find(function(e){return e.name===t})},e.getGameObjectsByType=function(t){return this.gameObjects.map(function(e){return e.type===t})},e.getGameObjects=function(){return this.gameObjects},e.getTextObject=function(t){return this.textObjects.find(function(e){return e.label===t})},e.deleteTextObject=function(t){var e=this.textObjects.findIndex(function(e){return e.label===t});-1!==e&&this.textObjects.splice(e,1)},e.update=function(t){this.gameObjects.forEach(function(e){return e.update(t)})},t}();function o(t){return(o=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)})(t)}function a(t,e){return(a=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t})(t,e)}function s(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],function(){})),!0}catch(t){return!1}}function c(t,e,n){return(c=s()?Reflect.construct:function(t,e,n){var r=[null];r.push.apply(r,e);var i=new(Function.bind.apply(t,r));return n&&a(i,n.prototype),i}).apply(null,arguments)}function u(t){var e="function"==typeof Map?new Map:void 0;return(u=function(t){if(null===t||-1===Function.toString.call(t).indexOf("[native code]"))return t;if("function"!=typeof t)throw new TypeError("Super expression must either be null or a function");if(void 0!==e){if(e.has(t))return e.get(t);e.set(t,n)}function n(){return c(t,arguments,o(this).constructor)}return n.prototype=Object.create(t.prototype,{constructor:{value:n,enumerable:!1,writable:!0,configurable:!0}}),a(n,t)})(t)}function f(t,e){(null==e||e>t.length)&&(e=t.length);for(var n=0,r=new Array(e);n<e;n++)r[n]=t[n];return r}function h(t,e){var n;if("undefined"==typeof Symbol||null==t[Symbol.iterator]){if(Array.isArray(t)||(n=function(t,e){if(t){if("string"==typeof t)return f(t,e);var n=Object.prototype.toString.call(t).slice(8,-1);return"Object"===n&&t.constructor&&(n=t.constructor.name),"Map"===n||"Set"===n?Array.from(t):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?f(t,e):void 0}}(t))||e&&t&&"number"==typeof t.length){n&&(t=n);var r=0;return function(){return r>=t.length?{done:!0}:{done:!1,value:t[r++]}}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}return(n=t[Symbol.iterator]()).next.bind(n)}var p=function(){function t(t){var e=t.font;Object.assign(this,{content:t.content,label:t.label,position:t.position,font:void 0===e?"18px verdana":e})}var e=t.prototype;return e.write=function(t){t.font=this.font,t.fillText(this.content,this.position.x,this.position.y)},e.update=function(t){return this.content=t,this},t}(),d=function(){function t(t){var e=t.width,n=t.height;this.canvas=document.getElementById(t.canvasId),this.canvas.width=e,this.canvas.height=n,this.context=this.canvas.getContext("2d")}var e=t.prototype;return e.clear=function(){this.context.clearRect(0,0,this.canvas.width,this.canvas.height)},e.renderObjects=function(t,e,n){for(var r,i=this,o=function(){var t=r.value,o=t.name,a=t.width,s=t.height,c=t.color,u=t.sprite,f=t.position,h=f.x,p=f.y;if(void 0===o)throw Error("name not found");if(void 0===h)throw Error("x not found");if(void 0===p)throw Error("y not found");if(void 0===a)throw Error("width not found");if(void 0===s)throw Error("height not found");if(void 0===c)throw Error("color not found");if(e.length){var d=e.find(function(t){return t.name===o});d&&(h=h*n+d.position.x*(1-n),p=p*n+d.position.y*(1-n))}if(void 0!==u){var l=u.getCurrentSpritePosition();i.context.drawImage(u,l.x*a,l.y*s,u.width,u.height,h,p,a,s)}else i.context.fillStyle=c,i.context.fillRect(h,p,a,s)},a=h(t);!(r=a()).done;)o()},e.write=function(t){for(var e,n=h(t);!(e=n()).done;)e.value.write(this.context)},t}(),l={currentFps:1,framesThisSecond:0,lastFpsUpdate:0,decayRatio:.25,MS_PER_UPDATE:Number((1e3/60).toFixed(1))},y=0;function m(t){var e,n=t.firstState,r=t.screen,i=t.update,o=l.MS_PER_UPDATE,a=0,s=window.performance.now(),c=n;!function t(n){var u=n-s;for(s=n,a+=u,n>l.lastFpsUpdate+1e3&&(l.currentFps=l.decayRatio*l.framesThisSecond+(1-l.decayRatio)*l.currentFps,l.lastFpsUpdate=n,l.framesThisSecond=0),l.framesThisSecond++;a>=o;)e=c,i({state:c,dt:o}),c.update(o),a-=o;y++,function(t,e){var n=e.currentState,r=e.previousState,i=e.interpolation,o=e.texts;t.clear(),t.write(o);var a=r?r.getGameObjects():[];t.renderObjects(n.getGameObjects(),a,i)}(r,{currentState:c,previousState:e,texts:[new p({content:"FPS: "+Math.round(l.currentFps),position:{x:1400,y:30},label:"FPS"})].concat(c.textObjects),interpolation:a/l.MS_PER_UPDATE}),window.requestAnimationFrame(t)}(window.performance.now())}var v=function(t){var e,n;function r(e){var n,r=e.spriteSheetWidth,i=e.spriteSheetHeight,o=e.numberOfSprites,a=e.maxSpritesPerRow,s=e.numberOfRows,c=e.currentAnimationStateName,u=e.animationStates,f=e.src;return(n=t.call(this,r/a,i/s)||this).maxSpritesPerRow=a,n.numberOfSprites=o,n.numberOfRows=s,n.spriteSheetWidth=r,n.spriteSheetHeight=i,n.currentAnimationStateName=c,n.animationStates=u,n.src=f,n}return n=t,(e=r).prototype=Object.create(n.prototype),e.prototype.constructor=e,a(e,n),r.prototype.getCurrentSpritePosition=function(){var t=this,e=this.animationStates.findIndex(function(e){return e.name===t.currentAnimationStateName}),n=this.animationStates[e];return{x:Math.floor(y/6)%n.numberOfFrames,y:e}},r}(u(Image)),b=function(t){var e=t.numberOfFrames;this.name=t.name,this.numberOfFrames=e};export{b as AnimationState,e as GameObject,d as GameScreen,r as Keyboard,v as SpriteSheet,i as State,p as Text,t as Vector,y as framesRendered,n as keyCodes,m as start};
-//# sourceMappingURL=limited.js.map
+
+(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
+class Vector {
+    constructor({
+        x, y
+    }) {
+        this.x = x;
+        this.y = y;
+    }
+    plus(other) {
+        return new Vector({
+          x: this.x + other.x, 
+          y: this.y + other.y
+        });
+      }
+}
+
+class GameObject {
+    constructor({
+        name,
+        type,
+        position,
+        width,
+        height,
+        color,
+        speed,
+        sprite
+    }) {
+        this.name = name;
+        this.type = type;
+        this.position = position || new Vector({ x: 0, y: 0 });
+        this.width = width;
+        this.height = height;
+        this.color = color;
+        this.speed = speed || new Vector({ x: 0, y: 0});
+        this.sprite = sprite;
+    }
+
+    getCenter() {
+        return new Vector({
+            x: this.position.x + this.width / 2,
+            y: this.position.y + this.height / 2
+        })
+    }
+
+    update(dt) {
+        this.position = new Vector({
+            x: this.position.x + (this.speed.x * dt),
+            y: this.position.y + (this.speed.y * dt)
+        });
+    }
+}
+
+const keyCodes = {
+    UP: 38,
+    DOWN: 40,
+    RIGHT: 39,
+    LEFT: 37,
+    W: 87,
+    A: 65,
+    S: 83,
+    D: 68,
+    SPACE: 32
+};
+
+class Keyboard {
+    keyState = {};
+
+    constructor() { 
+        window.addEventListener("keydown", this.keyDownHandler);
+
+        window.addEventListener("keyup", this.keyUpHandler);
+    }
+
+    keyDownHandler = (event) => {
+        event.preventDefault();
+        this.keyState[event.keyCode || event.which] = true;
+    }
+
+    keyUpHandler = (event) => {
+        event.preventDefault();
+        this.keyState[event.keyCode || event.which] = false;
+    }
+}
+
+class State {
+
+    /**
+     * 
+     * @param {{
+     *  gameObjects: GameObject[],
+     *  state: State
+     * }} param0 
+     */
+    constructor({ gameObjects, textObjects, state }) {
+        this.gameObjects = gameObjects;
+        this.textObjects = textObjects;
+        this.state = state;
+        this.keyboard = new Keyboard();
+    }
+
+    setGameObjects(go) {
+        this.gameObjects = go;
+    }
+
+    getGameObject(name) {
+        return this.gameObjects.find((go) => go.name === name);
+    }
+
+    getGameObjectsByType(type) {
+        return this.gameObjects.map((go) => go.type === type);
+    }
+
+    /**
+     * @returns {GameObject[]} gameObjects
+     */
+    getGameObjects() {
+        return this.gameObjects;
+    }
+
+    getTextObject(label) {
+        return this.textObjects.find((to) => to.label === label);
+    }
+
+    deleteTextObject(label) {
+        const index = this.textObjects.findIndex((to) => to.label === label);
+        
+        if (index !== -1) {
+            this.textObjects.splice(index, 1);
+        }
+    }
+
+    /**
+     * @param {number} dt 
+     * @returns {State}
+     */
+    update(dt) {
+        this.gameObjects.forEach(go => go.update(dt));
+    }
+}
+
+class Text {
+    /**
+     * 
+     * @param {{
+     *  content: string
+     *  position: Vector
+     *  font: string
+     * label: string
+     * }} param0 
+     */
+    constructor({ content, label, position, font = '18px verdana' }) {
+        Object.assign(this, { content, label, position, font });
+    }
+
+    /**
+     * 
+     * @param {CanvasRenderingContext2D} context 
+     */
+    write(context) {
+        context.font = this.font;
+        context.fillText(this.content, this.position.x, this.position.y);
+    }
+
+    update(newContent) {
+        this.content = newContent;
+
+        return this;
+    }
+}
+
+class GameScreen {
+    constructor({ canvasId, width, height }) {
+        this.canvas = document.getElementById(canvasId);
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.context = this.canvas.getContext('2d');
+        
+    }
+
+    clear() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    /**
+     * 
+     * @param {GameObject[]} currentGameObjects 
+     * @param {GameObject[]} previousGameObjects 
+     * @param {number} interpolation
+     */
+    renderObjects(currentGameObjects, previousGameObjects, interpolation) {
+
+        for (const object of currentGameObjects) {
+            const { name, width, height, color, sprite, currentAnimationStateName, position } = object;
+            let { x, y } = position;
+
+            if (name === undefined) throw Error('name not found');
+            if (x === undefined) throw Error('x not found');
+            if (y === undefined) throw Error('y not found');
+            if (width === undefined) throw Error('width not found');
+            if (height === undefined) throw Error('height not found');
+            if (color === undefined) throw Error('color not found');
+
+            if (previousGameObjects.length) {
+                const previousGo = previousGameObjects.find((go) => go.name === name);
+                if (previousGo) {
+                    const prevX = previousGo.position.x;
+                    const prevY = previousGo.position.y;
+
+                    x = x * interpolation + prevX * (1 - interpolation);
+                    y = y * interpolation + prevY * (1 - interpolation);
+                }
+            }
+
+        
+            if (sprite !== undefined) {
+               const spritePosition = sprite.getCurrentSpritePosition();
+               this.context.drawImage(sprite, spritePosition.x * width, spritePosition.y * height, sprite.width, sprite.height, x, y, width, height);
+            } else {
+                this.context.fillStyle = color;
+                this.context.fillRect(x, y, width, height);
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param {Text[]} texts 
+     */
+    write(texts) {
+        for (const text of texts) {
+            text.write(this.context);
+        }
+    }
+}
+
+const
+    ONE_SECOND = 1000,
+    UPDATES_PER_SECOND = 60;
+
+const settings = {
+    currentFps: 1,
+    framesThisSecond : 0,
+    lastFpsUpdate: 0,
+    decayRatio: 0.25,
+    MS_PER_UPDATE: Number((ONE_SECOND / UPDATES_PER_SECOND).toFixed(1))
+};
+let framesRendered = 0;
+
+/**
+ * 
+ * @param {{
+ *  firstState: State
+ *  screen: GameScreen
+ *  update: Function
+ * }} param0 
+ */
+function start({ firstState, screen, update }) {
+    const timeStep = settings.MS_PER_UPDATE;
+    
+    let lag = 0.0, 
+        previousTime = window.performance.now();
+    let currentState = firstState; 
+    let previousState;
+    
+    const gameLoop = (currentTime) => {
+        const elapsedTime = currentTime - previousTime;
+        previousTime = currentTime;
+        lag += elapsedTime;
+        
+        if (currentTime > settings.lastFpsUpdate + ONE_SECOND) {
+            /**
+             * Weighted moving average to calculate FPS
+             * https://gamedev.stackexchange.com/questions/141325/finding-average-input-value-over-time-in-seconds
+             * 
+             * https://stackoverflow.com/questions/4687430/c-calculating-moving-fps
+             */
+            settings.currentFps = settings.decayRatio * settings.framesThisSecond + (1 - settings.decayRatio) * settings.currentFps;
+
+            settings.lastFpsUpdate = currentTime;
+            settings.framesThisSecond = 0;
+        }
+        settings.framesThisSecond++;
+
+        while (lag >= timeStep) {
+
+            previousState = currentState;
+            update({ state: currentState, dt: timeStep});
+            currentState.update(timeStep);
+            lag -= timeStep;
+        }
+
+        framesRendered++;
+        render(
+            screen,
+            { 
+                currentState,
+                previousState,
+                texts: [
+                    new Text({ 
+                        content: `FPS: ${Math.round(settings.currentFps)}`,
+                        position: { x: 1400, y: 30 },
+                        label: 'FPS'
+                    }),
+                    ...currentState.textObjects
+                ],
+                interpolation:  lag / settings.MS_PER_UPDATE
+            }
+        );
+
+        window.requestAnimationFrame(gameLoop);
+    };
+
+    gameLoop(window.performance.now());
+}
+
+/**
+ * @param {{
+ *  currentState: State
+ *  previousState: State
+ *  texts: Text[]
+ *  interpolation: number
+ * }} params
+ */
+function render(screen, { currentState, previousState, interpolation, texts }) {
+    screen.clear();
+    screen.write(texts);
+
+    const previousGameObjects = previousState ? previousState.getGameObjects() : [];
+    screen.renderObjects(currentState.getGameObjects(), previousGameObjects, interpolation);
+}
+
+const STAGGER_FRAMES = 6;
+
+class SpriteSheet extends Image {
+    constructor({
+        spriteSheetWidth,
+        spriteSheetHeight,
+        numberOfSprites,
+        maxSpritesPerRow,
+        numberOfRows,
+        currentAnimationStateName,
+        animationStates,
+        src
+    }) {
+        super(spriteSheetWidth/maxSpritesPerRow, spriteSheetHeight/numberOfRows);
+        this.maxSpritesPerRow = maxSpritesPerRow;
+        this.numberOfSprites = numberOfSprites;
+        this.numberOfRows = numberOfRows;
+        this.spriteSheetWidth = spriteSheetWidth;
+        this.spriteSheetHeight = spriteSheetHeight;
+        this.currentAnimationStateName = currentAnimationStateName;
+        this.animationStates = animationStates;
+        this.src = src;
+    }
+
+    getCurrentSpritePosition() {
+        const currentStateIndex = this.animationStates.findIndex((state) => state.name === this.currentAnimationStateName);
+        const currentState = this.animationStates[currentStateIndex];
+        
+        // todo: if the animation just started should render from the first sprite in the animation sequence
+        const currentAnimationFrame = Math.floor(framesRendered/STAGGER_FRAMES) % currentState.numberOfFrames;
+
+        return {
+            x: currentAnimationFrame,
+            y: currentStateIndex
+        }
+    }
+}
+
+class AnimationState {
+    constructor({
+        name, 
+        numberOfFrames
+    }) {
+        this.name = name;
+        this.numberOfFrames = numberOfFrames;
+    }
+}
+
+export { AnimationState as AnimationSequence, GameObject, GameScreen, Keyboard, SpriteSheet, State, Text, Vector, framesRendered, keyCodes, start };
