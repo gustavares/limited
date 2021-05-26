@@ -1,4 +1,4 @@
-import { GameObject, keyCodes, Keyboard, Vector, State, SpriteSheet, framesRendered, AnimationState } from './../../../dist/limited.js';
+import { GameObject, keyCodes, Keyboard, Vector, State, SpriteSheet, framesRendered, AnimationSequence } from './../../../dist/limited.js';
 import { GRAVITY } from './index.js';
 
 export default class Player extends GameObject {
@@ -41,27 +41,27 @@ export default class Player extends GameObject {
                 src: 'images/newspritesheet.png',
                 currentAnimationStateName: 'idle',
                 animationStates: [
-                    new AnimationState({
+                    new AnimationSequence({
                         name: 'attacking',
                         numberOfFrames: 12
                     }),
-                    new AnimationState({
+                    new AnimationSequence({
                         name: 'jumping',
                         numberOfFrames: 3
                     }),
-                    new AnimationState({
+                    new AnimationSequence({
                         name: 'running',
                         numberOfFrames: 8,
                     }),
-                    new AnimationState({
+                    new AnimationSequence({
                         name:'idle',
                         numberOfFrames: 6,
                     }),
-                    new AnimationState({
+                    new AnimationSequence({
                         name: 'upandfall',
                         numberOfFrames: 2
                     }),
-                    new AnimationState({
+                    new AnimationSequence({
                         name: 'falling',
                         numberOfFrames: 3
                     })
