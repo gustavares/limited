@@ -1,4 +1,4 @@
-import { start, GameScreen, Vector, Text, State, keyCodes } from './../../../dist/limited.js';
+import { myGame, GameScreen, Vector, Text, State } from './../../dist/limited.js';
 import Platform from './Platform.js';
 import Player from './Player.js';
 
@@ -62,7 +62,7 @@ const update = ({ state, dt }) => {
     
 }
 
-start({
+myGame.start({
     firstState,
     update,
     screen

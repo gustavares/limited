@@ -1,4 +1,5 @@
-import { framesRendered } from './main.js';
+import gameLoop from './GameLoop.js';
+const { framesRendered } = gameLoop;
 const STAGGER_FRAMES = 6;
 
 export default class SpriteSheet extends Image {

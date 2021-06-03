@@ -6,4 +6,5 @@ export { default as Keyboard, keyCodes } from './Keyboard.js';
 export { default as Text } from './Text.js';
 export { default as SpriteSheet } from './SpriteSheet.js';
 export { default as AnimationSequence } from './AnimationSequence.js';
+export { default as myGame } from './GameLoop.js';
 export { start, framesRendered } from './main.js';
