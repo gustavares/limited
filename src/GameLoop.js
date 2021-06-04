@@ -19,7 +19,7 @@ class GameLoop {
     currentState; previousState; previousTime;
     screen;
 
-    _loop(currentTime) {
+    _loop = (currentTime) => {
         const elapsedTime = currentTime - this.previousTime;
         this.previousTime = currentTime;
         this.lag += elapsedTime;
@@ -66,10 +66,10 @@ class GameLoop {
         window.requestAnimationFrame(this._loop);
     }
 
-    start({
+    start = ({
         firstState,
         screen
-    }) {
+    }) => {
         this.screen = screen;
         this.previousTime = window.performance.now();
         this.currentState = firstState; 
@@ -77,7 +77,7 @@ class GameLoop {
         this._loop(window.performance.now());
     }
 
-    _render(screen, { currentState, previousState, interpolation, texts }) {
+    _render = (screen, { currentState, previousState, interpolation, texts }) => {
         screen.clear();
         screen.write(texts);
     
