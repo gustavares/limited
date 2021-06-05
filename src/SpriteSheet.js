@@ -1,5 +1,4 @@
 import gameLoop from './GameLoop.js';
-const { framesRendered } = gameLoop;
 const STAGGER_FRAMES = 6;
 
 export default class SpriteSheet extends Image {
@@ -24,12 +23,12 @@ export default class SpriteSheet extends Image {
         this.src = src;
     }
 
-    getCurrentSpritePosition() {
+    getCurrentSpritePosition = () => {
         const currentStateIndex = this.animationStates.findIndex((state) => state.name === this.currentAnimationStateName);
         const currentState = this.animationStates[currentStateIndex];
         
         // todo: if the animation just started should render from the first sprite in the animation sequence
-        const currentAnimationFrame = Math.floor(framesRendered/STAGGER_FRAMES) % currentState.numberOfFrames;
+        const currentAnimationFrame = Math.floor(gameLoop.framesRendered/STAGGER_FRAMES) % currentState.numberOfFrames;
 
         return {
             x: currentAnimationFrame,

@@ -7,7 +7,6 @@ export default class GameScreen {
         this.canvas.width = width;
         this.canvas.height = height;
         this.context = this.canvas.getContext('2d');
-        
     }
 
     clear() {
@@ -20,7 +19,7 @@ export default class GameScreen {
      * @param {GameObject[]} previousGameObjects 
      * @param {number} interpolation
      */
-    renderObjects(currentGameObjects, previousGameObjects, interpolation) {
+    renderObjects = (currentGameObjects, previousGameObjects, interpolation) => {
 
         for (const object of currentGameObjects) {
             const { name, width, height, color, sprite, currentAnimationStateName, position } = object;
