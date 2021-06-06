@@ -10,10 +10,11 @@ export default class State {
      *  state: State
      * }} param0 
      */
-    constructor({ gameObjects, textObjects, state }) {
+    constructor({ gameObjects, textObjects, name, screen }) {
         this.gameObjects = gameObjects;
         this.textObjects = textObjects;
-        this.state = state;
+        this.name = name;
+        this.screen = screen;
         this.keyboard = new Keyboard();
     }
 
@@ -54,5 +55,13 @@ export default class State {
      */
     update(dt) {
         this.gameObjects.forEach(go => go.update(dt));
+    }
+
+    render({ interpolation, previousState }) {
+        this.screen.clear();
+        this.screen.write(this.textObjects);
+    
+        const previousGameObjects = previousState ? previousState.getGameObjects() : [];
+        this.screen.renderObjects(this.gameObjects, previousGameObjects, interpolation);
     }
 }

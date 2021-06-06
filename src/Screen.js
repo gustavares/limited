@@ -42,7 +42,6 @@ export default class GameScreen {
                     y = y * interpolation + prevY * (1 - interpolation);
                 }
             }
-
         
             if (sprite !== undefined) {
                const spritePosition = sprite.getCurrentSpritePosition();

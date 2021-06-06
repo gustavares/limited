@@ -39,50 +39,39 @@ class GameLoop {
         settings.framesThisSecond++;
 
         while (this.lag >= this.timeStep) {
-
             this.previousState = this.currentState;
             this.currentState.update(this.timeStep);
             this.lag -= this.timeStep;
         }
 
         this.framesRendered++;
-        this._render(
-            this.screen,
-            { 
-                currentState: this.currentState,
-                previousState: this.previousState,
-                texts: [
-                    new Text({ 
-                        content: `FPS: ${Math.round(settings.currentFps)}`,
-                        position: { x: 1400, y: 30 },
-                        label: 'FPS'
-                    }),
-                    ...this.currentState.textObjects
-                ],
-                interpolation:  this.lag / settings.MS_PER_UPDATE
-            }
-        );
+
+        // todo: create debug config logic to toggle fps display
+        this.currentState.textObjects = [ this.getFpsTextObject() ];
+        
+        this.currentState.render({
+            interpolation: this.lag / settings.MS_PER_UPDATE,
+            previousState: this.previousState
+        });
 
         window.requestAnimationFrame(this._loop);
     }
 
     start = ({
-        firstState,
-        screen
+        firstState
     }) => {
-        this.screen = screen;
         this.previousTime = window.performance.now();
         this.currentState = firstState; 
 
         this._loop(window.performance.now());
     }
 
-    _render = (screen, { currentState, previousState, interpolation, texts }) => {
-        screen.clear();
-        screen.write(texts);
-    
-        const previousGameObjects = previousState ? previousState.getGameObjects() : [];
-        screen.renderObjects(currentState.getGameObjects(), previousGameObjects, interpolation);
+    getFpsTextObject = () => {
+        return new Text({ 
+            content: `FPS: ${Math.round(settings.currentFps)}`,
+            position: { x: 1400, y: 30 },
+            label: 'FPS'
+        });
     }
 }
 

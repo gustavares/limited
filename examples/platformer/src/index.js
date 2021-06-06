@@ -1,4 +1,4 @@
-import { myGame, GameScreen, Vector, Text, State } from './../../dist/limited.js';
+import { myGame, GameScreen, Vector, State } from './../../dist/limited.js';
 import Platform from './Platform.js';
 import Player from './Player.js';
 
@@ -52,7 +52,8 @@ const firstState = new State({
     textObjects: [
 
     ],
-    state: 'playing'
+    name: 'playing',
+    screen
 });
 
 const player = firstState.getGameObject('player');
@@ -64,6 +65,5 @@ const update = ({ state, dt }) => {
 
 myGame.start({
     firstState,
-    update,
-    screen
+    update
 })
